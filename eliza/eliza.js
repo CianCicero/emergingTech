@@ -4,8 +4,8 @@ const keyResponses = [
 ];
 
 const patternResponses = [
-    { patterns: [/I FEEL (.*)/], response: "Why are you feeling like that" },
-    { patterns: [/I DON'T LIKE (.*)/], response: "What bothers you most about it" },
+    { patterns: /I AM (.*)/i, response: "Why are you feeling {0}?" },
+    { patterns: /I DON'T LIKE (.*)/i, response: "What bothers you most about {0}?" },
 ];
 
 function submitMessage() {
@@ -34,17 +34,14 @@ function generateResponse(userMessage) {
 
     for (var i = 0; i < patternResponses.length; i++) {
         const selectedPatternResponse = patternResponses[i];
-        if (containsAnyPatterns(userMessage, patternResponses[i].patterns)) {
-            return selectedPatternResponse.response;
+        const contextualResponseWord = containsAnyPatterns(userMessage, patternResponses[i].patterns);
+        if (contextualResponseWord) {
+            return selectedPatternResponse.response.replace("{0}", contextualResponseWord);
         }
-    }    
-
+    }
 
     return defaultResponse;
 }
-
-
-
 
 function containsAnyKeys(userMessage, keys) {
     if (!keys || keys.length === 0) return false;
@@ -56,11 +53,14 @@ function containsAnyKeys(userMessage, keys) {
 function containsAnyPatterns(userMessage, patterns) {
     const message = userMessage.toUpperCase();  
 
-    for (var i = 0; i < patterns.length; i++) {
-    matches = message.match(patterns[i]);
+    //check if the pattern matches
+    const matches = message.match(patterns);
+    
+    //captured word
     if (matches) {
-        return matches;
+        return matches[1]; 
     }
-    return null; 
+    
+    return null;
 }
-}
+
