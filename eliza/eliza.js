@@ -45,7 +45,12 @@ function submitMessage() {
 }
 
 function generateResponse(userMessage) {
-    var defaultResponse = "Can you expand on that?";
+
+    const defaultResponses = [
+        "I don't quite understand, can you rephrase that?",
+        "Can you expand on that?",
+        "How do you feel about that?"
+    ];
 
     userMessage = userMessage.toUpperCase();
 
@@ -79,7 +84,7 @@ function generateResponse(userMessage) {
         return "Interesting, " + reflectWords(userMessage) + "?";
     }
 
-    return defaultResponse;
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 
  };
 
