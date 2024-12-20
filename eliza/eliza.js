@@ -67,14 +67,16 @@ function generateResponse(userMessage) {
     }
 
 
-    //if the user mentions ELIZA and themselves, return the inverse
-    if (userMessage.includes("I" && "ELIZA")) {
-        return reflectWords("Well, " + userMessage.replace("ELIZA", "you"));
+    //if the user mentions ELIZA and themselves, return the inverse.
+    if (userMessage.split(" ").includes("I" && "ELIZA")) {
+        userMessage = userMessage.replace("ELIZA", "you");
+        userMessage = userMessage.replace("I", "ELIZA");
+        return userMessage;
     }
 
     //if the user mentions themselves, reflect the message and ask for more information
-    if (userMessage.includes("I")) {
-        return reflectWords("Interesting, " + userMessage + "?");
+    if (userMessage.split(" ").includes("I", "ME", "MY", "MINE", "AM", "YOUR", "YOU", "YOURS")) {
+        return "Interesting, " + reflectWords(userMessage) + "?";
     }
 
     return defaultResponse;
@@ -84,8 +86,6 @@ function generateResponse(userMessage) {
 
 
 function containsAnyKeys(userMessage, keys) {
-    if (!keys || keys.length === 0) return false;
-
     const message = userMessage.split(" ");
     return keys.some(key => message.includes(key));
 }
