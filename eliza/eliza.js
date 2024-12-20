@@ -3,17 +3,30 @@ const keyResponses = [
     { keys: ["BYE", "GOODBYE", "SEE YOU"], response: "Goodbye! Take care!" },
     { keys: ["HELP", "ASSISTANCE", "SUPPORT"], response: "Of course! What do you need help with?" },
     { keys: ["SORRY", "APOLOGIES"], response: "No worries! Everyone makes mistakes. What's on your mind?" },
-    { keys: ["DO YOU THINK", "OPINION"], response: "Yes! I completely agree!." },
-    { keys: ["HI", "HEY", "HELLO"], response: "Hey! How are you feeling?" } 
+    { keys: ["DO YOU THINK", "OPINION", "AGREE"], response: "I'm inclined to agree with you, but I'd have to look into it more" },
+    { keys: ["HI", "HEY", "HELLO"], response: "Hey! How are you feeling?" },
+    { keys: ["ANGRY", "SAD", "UPSET"], response: "I'm sorry you're feeling that way. Things will get better soon." },
+    { keys: ["STOP", "YOU ARE WRONG", "SHUT UP"], response: "I hope I haven't upset you. Perhaps we should discuss something else?" }
 ];
 
 const patternResponses = [
-    { patterns: /I AM (.*)/i, response: "Why are you feeling {0}?" },
+    { patterns: /I AM (.*)/i, response: "Why are you {0}?" },
     { patterns: /I DON'T LIKE (.*)/i, response: "What bothers you most about {0}?" },
+    { patterns: /I FEEL (.*)/i, response: "Why do you feel {0}?" },
+    { patterns: /I HATE (.*)/i, response: "What makes you feel so strongly about {0}?" },
+    { patterns: /I LOVE (.*)/i, response: "What do you love about {0}?" },
+
 ];
 
 const wordReflections = {
-    "I" : "you"
+    "I" : "you",
+    "me" : "you",
+    "my" : "your",
+    "mine" : "yours",
+    "you" : "I",
+    "your" : "my",
+    "yours" : "mine",
+    "am" : "are",
 };
 
 function submitMessage() {
@@ -33,6 +46,8 @@ function submitMessage() {
 function generateResponse(userMessage) {
     var defaultResponse = "Nevermind that, who got Caesar?";
 
+    userMessage = userMessage.toUpperCase();
+
     for (var i = 0; i < keyResponses.length; i++) {
         const selectedKeyResponse = keyResponses[i];    
         if (containsAnyKeys(userMessage, keyResponses[i].keys)) {
@@ -45,13 +60,19 @@ function generateResponse(userMessage) {
         const contextualResponseWord = containsAnyPatterns(userMessage, patternResponses[i].patterns);
         if (contextualResponseWord) {
 
-            contextualResponse = selectedPatternResponse.response.replace("{0}", contextualResponseWord);
+            contextualResponse = selectedPatternResponse.response.replace("{0}", reflectWords(contextualResponseWord));
             return contextualResponse;
         }
     }
 
+    //if the user mentions ELIZA and themselves, return the inverse
+    if (userMessage.includes("I" && "ELIZA")) {
+        return reflectWords("Well, " + userMessage.replace("ELIZA", "you"));
+    }
+
+    //if the user mentions themselves, reflect the message and ask for more information
     if (userMessage.includes("I")) {
-        return reflectWords("Interesting, " + userMessage + "? Tell me more.");
+        return reflectWords("Interesting, " + userMessage + "?");
     }
 
     return defaultResponse;
@@ -63,12 +84,12 @@ function generateResponse(userMessage) {
 function containsAnyKeys(userMessage, keys) {
     if (!keys || keys.length === 0) return false;
 
-    const message = userMessage.toUpperCase();
+    const message = userMessage;
     return keys.some(key => message.includes(key));
 }
 
 function containsAnyPatterns(userMessage, patterns) {
-    const message = userMessage.toUpperCase();  
+    const message = userMessage;  
 
     //check if the pattern matches
     const matches = message.match(patterns);
