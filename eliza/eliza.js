@@ -137,7 +137,7 @@ function submitMessage() {
 
     var botResponse = generateResponse(userMessage);
 
-    conversation.innerHTML += `<div class="bot-response">${botResponse}</div>`;
+    conversation.innerHTML += `<div class="bot-message">${botResponse}</div>`;
 
     conversation.scrollTop = conversation.scrollHeight;
 
