@@ -1,6 +1,10 @@
 const keyResponses = [
-    { keys: ["CASSIUS", "LONGIUS"], response: "I knew it!" },
-    { keys: ["BRUTUS"], response: "Et tu, Brute?" },
+    { keys: ["THANK YOU", "THANKS"], response: "You're welcome! Is there anything else you need?" },
+    { keys: ["BYE", "GOODBYE", "SEE YOU"], response: "Goodbye! Take care!" },
+    { keys: ["HELP", "ASSISTANCE", "SUPPORT"], response: "Of course! What do you need help with?" },
+    { keys: ["SORRY", "APOLOGIES"], response: "No worries! Everyone makes mistakes. What's on your mind?" },
+    { keys: ["DO YOU THINK", "OPINION"], response: "Yes! I completely agree!." },
+    { keys: ["HI", "HEY", "HELLO"], response: "Hey! How are you feeling?" } 
 ];
 
 const patternResponses = [
