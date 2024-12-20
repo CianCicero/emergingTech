@@ -8,6 +8,10 @@ const patternResponses = [
     { patterns: /I DON'T LIKE (.*)/i, response: "What bothers you most about {0}?" },
 ];
 
+const wordReflections = {
+    "I" : "you"
+};
+
 function submitMessage() {
     var userMessage = document.getElementById("user-input").value;
     if (!userMessage) return;
@@ -36,12 +40,21 @@ function generateResponse(userMessage) {
         const selectedPatternResponse = patternResponses[i];
         const contextualResponseWord = containsAnyPatterns(userMessage, patternResponses[i].patterns);
         if (contextualResponseWord) {
-            return selectedPatternResponse.response.replace("{0}", contextualResponseWord);
+
+            contextualResponse = selectedPatternResponse.response.replace("{0}", contextualResponseWord);
+            return contextualResponse;
         }
     }
 
+    if (userMessage.includes("I")) {
+        return reflectWords("Interesting, " + userMessage + "? Tell me more.");
+    }
+
     return defaultResponse;
-}
+
+ };
+
+
 
 function containsAnyKeys(userMessage, keys) {
     if (!keys || keys.length === 0) return false;
@@ -62,5 +75,11 @@ function containsAnyPatterns(userMessage, patterns) {
     }
     
     return null;
+}
+
+function reflectWords(userMessage) {
+    const words = userMessage.split(" ");
+    const reflectedWords = words.map(word => wordReflections[word] || word);
+    return reflectedWords.join(" ");
 }
 
