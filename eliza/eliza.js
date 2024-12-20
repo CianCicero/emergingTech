@@ -3,6 +3,11 @@ const keyResponses = [
     { keys: ["BRUTUS"], response: "Et tu, Brute?" },
 ];
 
+const patternResponses = [
+    { pattern: [/I AM ([A-Z]+)/, /I'M ([A-Z]+)/ ], response: "Why are you $1?" },
+    { pattern: [/I DON'T LIKE ([A-Z]+)/, /I HATE ([A-Z]+)/], response: "What bothers you most about $1?" },
+];
+
 function submitMessage() {
     var userMessage = document.getElementById("user-input").value;
     if (!userMessage) return;
