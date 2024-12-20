@@ -92,6 +92,9 @@ function submitMessage() {
     var conversation = document.getElementById("conversation");
     conversation.innerHTML += `<div class="user-message">${userMessage}</div>`;
 
+    conversation.scrollTop = conversation.scrollHeight;
+
+
     var botResponse = generateResponse(userMessage);
 
     conversation.innerHTML += `<div class="bot-response">${botResponse}</div>`;
@@ -141,7 +144,8 @@ if (userMessage.split(" ").includes("i") && userMessage.split(" ").includes("eli
 
 
     //if the user mentions themselves, reflect the message and ask for more information
-    if (userMessage.split(" ").includes("I", "ME", "MY", "MINE", "AM", "YOUR", "YOU", "YOURS")) {
+    const reflectionKeys = Object.keys(wordReflections);
+    if (userMessage.split(" ").some(word => reflectionKeys.includes(word.toLowerCase()))) {
         return "Interesting, " + reflectWords(userMessage) + "?";
     }
 
