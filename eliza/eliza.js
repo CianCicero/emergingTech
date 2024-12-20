@@ -86,7 +86,7 @@ function generateResponse(userMessage) {
 function containsAnyKeys(userMessage, keys) {
     if (!keys || keys.length === 0) return false;
 
-    const message = userMessage;
+    const message = userMessage.split(" ");
     return keys.some(key => message.includes(key));
 }
 
