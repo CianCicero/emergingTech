@@ -1,0 +1,96 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Logs and runtime files
+*.log
+*.pid
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.coverage
+.coverage.*
+
+# Virtual environments
+venv/
+env/
+ENV/
+*.env
+*.venv
+
+# Python-specific
+__pycache__/
+*.egg-info/
+*.egg
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js-specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build files
+build/
+dist/
+*.bundle.js
+*.min.js
+
+# Test-related
+.tox/
+.nox/
+.pytest_cache/
+.jest/
+
+# Coverage reports
+htmlcov/
+coverage.xml
+
+# Linting
+.pylint.d/
+.eslintcache/
+.stylelintcache
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.old
+*.orig
+*.rej
+
+# Static files
+/static/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Miscellaneous
+*.out
+*.log
+*.gz
+*.tar
+*.zip
+*.7z
+*.rar
+*.bz2
+
+# Ignore local configs
+*.local
+
+# Mac-specific
+.AppleDouble
+.LSOverride
