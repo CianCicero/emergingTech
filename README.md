@@ -48,8 +48,12 @@ To install Jupyter Notebooks, you can use Python's package manager `pip`. First,
 ## ELIZA ChatBot
 
 ### Installation
-#### Installation of the Eliza bot is not necessary as it is deployed via via GitHub Pages
+#### Installation of the Eliza bot is not necessary as it is deployed via GitHub Pages
+
+Just follow [This link](https://ciancicero.github.io/emergingTech/)
 #### It uses several techniques (such as reflection, pattern-matching and keyword recognition) to respond to user messages. 
+
+After talking to the ELIZA ChatBot, I suggest looking through the eliza.js file to understand how it works.
 
 ## References can be found for both elements, at the end of their respective source code.
 
