@@ -1,5 +1,6 @@
 const keyResponses = [
     { keys: ["THANK YOU", "THANKS"], response: "You're welcome! Is there anything else you need?" },
+    { keys: ["GOOD", "HAPPY", "WELL"], response: "I'm glad to hear that! What's new with you?" },
     { keys: ["BYE", "GOODBYE", "SEE YOU"], response: "Goodbye! Take care!" },
     { keys: ["HELP", "ASSISTANCE", "SUPPORT"], response: "Of course! What do you need help with?" },
     { keys: ["SORRY", "APOLOGIES"], response: "No worries! Everyone makes mistakes. What's on your mind?" },
@@ -44,16 +45,9 @@ function submitMessage() {
 }
 
 function generateResponse(userMessage) {
-    var defaultResponse = "Nevermind that, who got Caesar?";
+    var defaultResponse = "Can you expand on that?";
 
     userMessage = userMessage.toUpperCase();
-
-    for (var i = 0; i < keyResponses.length; i++) {
-        const selectedKeyResponse = keyResponses[i];    
-        if (containsAnyKeys(userMessage, keyResponses[i].keys)) {
-            return selectedKeyResponse.response;
-        }
-    }
 
     for (var i = 0; i < patternResponses.length; i++) {
         const selectedPatternResponse = patternResponses[i];
@@ -63,7 +57,15 @@ function generateResponse(userMessage) {
             contextualResponse = selectedPatternResponse.response.replace("{0}", reflectWords(contextualResponseWord));
             return contextualResponse;
         }
+    } 
+  
+    for (var i = 0; i < keyResponses.length; i++) {
+        const selectedKeyResponse = keyResponses[i];    
+        if (containsAnyKeys(userMessage, keyResponses[i].keys)) {
+            return selectedKeyResponse.response;
+        }
     }
+
 
     //if the user mentions ELIZA and themselves, return the inverse
     if (userMessage.includes("I" && "ELIZA")) {
