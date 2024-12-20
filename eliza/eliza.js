@@ -1,61 +1,61 @@
 const keyResponses = [
-    { keys: ["THANK YOU", "THANKS"], 
+    { keys: ["thank you", "thanks"], 
         responses: [
         "You're welcome! Is there anything else you need?",
         "No problem! Happy to help. Anything else on your mind?",
         "You're very welcome! Let me know if you need anything else."
     ], lastUsed: 0 },
     
-    { keys: ["GOOD", "HAPPY", "WELL"], 
+    { keys: ["good", "happy", "well"], 
         responses: [
         "I'm glad to hear that! What's new with you?",
         "That’s great! What’s been going well for you?",
         "Awesome! Anything exciting happening in your life right now?"
     ], lastUsed: 0 },
     
-    { keys: ["BYE", "GOODBYE", "SEE YOU"], 
+    { keys: ["bye", "goodbye", "see you"], 
         responses: [
         "Goodbye! Take care!",
         "It was nice chatting! See you soon!",
         "Take care! Don’t hesitate to reach out if you need anything."
     ], lastUsed: 0 },
     
-    { keys: ["HELP", "ASSISTANCE", "SUPPORT"], 
+    { keys: ["help", "assistance", "support"], 
         responses: [
         "Of course! What do you need help with?",
         "I’m here for you! What can I assist you with?",
         "How can I make things easier for you today?"
     ], lastUsed: 0 },
     
-    { keys: ["SORRY", "APOLOGIES"], 
+    { keys: ["sorry", "apologies"], 
         responses: [
         "No worries! Everyone makes mistakes. What's on your mind?",
         "It’s all good! What’s bothering you?",
         "Don’t worry about it! Let’s talk through what happened."
     ], lastUsed: 0 },
     
-    { keys: ["DO YOU THINK", "OPINION", "AGREE"], 
+    { keys: ["do you think", "opinion", "agree"], 
         responses: [
         "I'm inclined to agree with you, but I'd have to look into it more.",
         "That’s an interesting perspective! I’ll need to consider it further.",
         "I see your point! I’ll think it over and get back to you."
     ], lastUsed: 0 },
     
-    { keys: ["HI", "HEY", "HELLO"], 
+    { keys: ["hi", "hey", "hello"], 
         responses: [
         "Hey! How are you feeling?",
         "Hello! How’s everything going?",
         "Hi there! How’s your day been so far?"
     ], lastUsed: 0 },
     
-    { keys: ["ANGRY", "SAD", "UPSET"], 
+    { keys: ["angry", "sad", "upset"], 
         responses: [
         "I'm sorry you're feeling that way. Things will get better soon.",
         "I understand, it’s tough sometimes. Want to talk about it?",
         "I’m here to listen if you need to vent. What’s bothering you?"
     ], lastUsed: 0 },
     
-    { keys: ["STOP", "YOU ARE WRONG", "SHUT UP"], 
+    { keys: ["stop", "you are wrong", "shut up"], 
         responses: [
         "I hope I haven't upset you. Perhaps we should discuss something else?",
         "I'm really sorry if I said something wrong. Let’s talk about something else.",
@@ -64,17 +64,18 @@ const keyResponses = [
 ];
 
 
-const patternResponses = [
-    { patterns: /I AM (.*)/i, response: "Why are you {0}?" },
-    { patterns: /I DON'T LIKE (.*)/i, response: "What bothers you most about {0}?" },
-    { patterns: /I FEEL (.*)/i, response: "Why do you feel {0}?" },
-    { patterns: /I HATE (.*)/i, response: "What makes you feel so strongly about {0}?" },
-    { patterns: /I LOVE (.*)/i, response: "What do you love about {0}?" },
 
+const patternResponses = [
+    { patterns: /i am (.*)/i, response: "Why are you {0}?" },
+    { patterns: /i don't like (.*)/i, response: "What bothers you most about {0}?" },
+    { patterns: /i feel (.*)/i, response: "Why do you feel {0}?" },
+    { patterns: /i hate (.*)/i, response: "What makes you feel so strongly about {0}?" },
+    { patterns: /i love (.*)/i, response: "What do you love about {0}?" },
 ];
 
+
 const wordReflections = {
-    "I" : "you",
+    "i" : "you",
     "me" : "you",
     "my" : "your",
     "mine" : "yours",
@@ -106,7 +107,7 @@ function generateResponse(userMessage) {
         "How do you feel about that?"
     ];
 
-    userMessage = userMessage.toUpperCase();
+    userMessage = userMessage.toLowerCase();
 
     for (var i = 0; i < patternResponses.length; i++) {
         const selectedPatternResponse = patternResponses[i];
@@ -130,11 +131,14 @@ function generateResponse(userMessage) {
 
 
     //if the user mentions ELIZA and themselves, return the inverse.
-    if (userMessage.split(" ").includes("I" && "ELIZA")) {
-        userMessage = userMessage.replace("ELIZA", "you");
-        userMessage = userMessage.replace("I", "ELIZA");
-        return userMessage;
-    }
+if (userMessage.split(" ").includes("i") && userMessage.split(" ").includes("eliza")) {
+    // Replace "eliza" with "you" and "i" with "eliza"
+    userMessage = userMessage.replace("eliza", "you");
+    userMessage = userMessage.replace("i", "eliza");
+    return userMessage;
+}
+
+
 
     //if the user mentions themselves, reflect the message and ask for more information
     if (userMessage.split(" ").includes("I", "ME", "MY", "MINE", "AM", "YOUR", "YOU", "YOURS")) {
