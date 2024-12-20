@@ -85,6 +85,17 @@ const wordReflections = {
     "am" : "are",
 };
 
+const inputField = document.getElementById('user-input');
+
+inputField.addEventListener('focus', function() {
+    inputField.placeholder = '';
+});
+
+
+
+
+
+
 function submitMessage() {
     var userMessage = document.getElementById("user-input").value;
     if (!userMessage) return;

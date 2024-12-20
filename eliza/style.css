@@ -45,6 +45,11 @@ h1 {
     border-radius: 8px;
 }
 
+input::placeholder {
+    color: grey;
+    font-style: italic; 
+}
+
 input[type="text"] {
     width: 100%;
     padding: 12px;
