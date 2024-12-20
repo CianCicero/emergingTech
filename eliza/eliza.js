@@ -1,5 +1,5 @@
 const keyResponses = [
-    { keys: ["thank you", "thanks"], 
+    { keys: ["thank", "thanks"], 
         responses: [
         "You're welcome! Is there anything else you need?",
         "No problem! Happy to help. Anything else on your mind?",
@@ -13,7 +13,7 @@ const keyResponses = [
         "Awesome! Anything exciting happening in your life right now?"
     ], lastUsed: 0 },
     
-    { keys: ["bye", "goodbye", "see you"], 
+    { keys: ["bye", "goodbye", "seeya"], 
         responses: [
         "Goodbye! Take care!",
         "It was nice chatting! See you soon!",
@@ -34,7 +34,7 @@ const keyResponses = [
         "Don’t worry about it! Let’s talk through what happened."
     ], lastUsed: 0 },
     
-    { keys: ["do you think", "opinion", "agree"], 
+    { keys: ["think", "opinion", "agree"], 
         responses: [
         "I'm inclined to agree with you, but I'd have to look into it more.",
         "That’s an interesting perspective! I’ll need to consider it further.",
@@ -45,7 +45,7 @@ const keyResponses = [
         responses: [
         "Hey! How are you feeling?",
         "Hello! How’s everything going?",
-        "Hi there! How’s your day been so far?"
+        "Hi there! How’s your day been?"
     ], lastUsed: 0 },
     
     { keys: ["angry", "sad", "upset"], 
@@ -55,7 +55,7 @@ const keyResponses = [
         "I’m here to listen if you need to vent. What’s bothering you?"
     ], lastUsed: 0 },
     
-    { keys: ["stop", "you are wrong", "shut up"], 
+    { keys: ["stop", "wrong", "unplug"], 
         responses: [
         "I hope I haven't upset you. Perhaps we should discuss something else?",
         "I'm really sorry if I said something wrong. Let’s talk about something else.",
@@ -92,12 +92,11 @@ function submitMessage() {
     var conversation = document.getElementById("conversation");
     conversation.innerHTML += `<div class="user-message">${userMessage}</div>`;
 
-    conversation.scrollTop = conversation.scrollHeight;
-
-
     var botResponse = generateResponse(userMessage);
 
     conversation.innerHTML += `<div class="bot-response">${botResponse}</div>`;
+
+    conversation.scrollTop = conversation.scrollHeight;
 
     document.getElementById("user-input").value = "";
 }
