@@ -4,8 +4,8 @@ const keyResponses = [
 ];
 
 const patternResponses = [
-    { pattern: [/I AM ([A-Z]+)/, /I'M ([A-Z]+)/ ], response: "Why are you $1?" },
-    { pattern: [/I DON'T LIKE ([A-Z]+)/, /I HATE ([A-Z]+)/], response: "What bothers you most about $1?" },
+    { patterns: [/I FEEL (.*)/], response: "Why are you feeling like that" },
+    { patterns: [/I DON'T LIKE (.*)/], response: "What bothers you most about it" },
 ];
 
 function submitMessage() {
@@ -32,12 +32,35 @@ function generateResponse(userMessage) {
         }
     }
 
+    for (var i = 0; i < patternResponses.length; i++) {
+        const selectedPatternResponse = patternResponses[i];
+        if (containsAnyPatterns(userMessage, patternResponses[i].patterns)) {
+            return selectedPatternResponse.response;
+        }
+    }    
+
+
     return defaultResponse;
 }
+
+
+
 
 function containsAnyKeys(userMessage, keys) {
     if (!keys || keys.length === 0) return false;
 
     const message = userMessage.toUpperCase();
     return keys.some(key => message.includes(key));
+}
+
+function containsAnyPatterns(userMessage, patterns) {
+    const message = userMessage.toUpperCase();  
+
+    for (var i = 0; i < patterns.length; i++) {
+    matches = message.match(patterns[i]);
+    if (matches) {
+        return matches;
+    }
+    return null; 
+}
 }
