@@ -91,9 +91,11 @@ inputField.addEventListener('focus', function() {
     inputField.placeholder = '';
 });
 
-
-
-
+inputField.addEventListener('blur', function() {
+    inactivityTimer = setTimeout(function() {
+        inputField.placeholder = 'Type your message here...';
+    }, 5000);
+});
 
 
 function submitMessage() {
