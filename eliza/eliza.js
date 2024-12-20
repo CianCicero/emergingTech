@@ -283,3 +283,23 @@ function isAllCaps(userMessage) {
     return false;
 }
 
+/*
+References:
+
+Stack Overflow:
+    https://stackoverflow.com/questions/5582574/how-to-check-if-a-string-contains-text-from-an-array-of-substrings-in-javascript
+    https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript
+    https://stackoverflow.com/questions/37896484/multiple-conditions-for-javascript-includes-method
+   
+
+Other:
+    https://blog.bitsrc.io/best-practices-for-using-comments-in-javascript-4c4cd8619c18
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
+    https://github.com/ianmcloughlin/2425_emerging_technologies/blob/main/03_eliza.ipynb
+    https://www.geeksforgeeks.org/find-word-character-in-a-string-with-javascript-regexp/
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+*/
+
