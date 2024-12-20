@@ -277,8 +277,9 @@ function reflectWords(userMessage) {
 
 // Function to check if the user message is all caps
 function isAllCaps(userMessage) {
-    if (userMessage === userMessage.toUpperCase() && userMessage.length > 1);{
+    if (userMessage === userMessage.toUpperCase() && userMessage.length > 1) { 
         return true;
     }
+    return false;
 }
 
