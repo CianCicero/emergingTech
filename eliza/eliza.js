@@ -148,6 +148,11 @@ if (userMessage.split(" ").includes("i") && userMessage.split(" ").includes("eli
         return "Interesting, " + reflectWords(userMessage) + "?";
     }
 
+    if (isAllCaps(userMessage)) {
+        return "SHOUTING WON'T HELP ANYONE! *ahem* ... I mean, how can I assist you today?";
+    }
+
+
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 
  };
@@ -177,5 +182,11 @@ function reflectWords(userMessage) {
     const words = userMessage.split(" ");
     const reflectedWords = words.map(word => wordReflections[word] || word);
     return reflectedWords.join(" ");
+}
+
+function isAllCaps(userMessage) {
+    if (userMessage === userMessage.toUpperCase() && userMessage.length > 1);{
+        return true;
+    }
 }
 
